@@ -4,7 +4,7 @@ module "ingress_alb" {
   internal = true
   name    = "${local.resource_name}-ingress-alb" #expense-dev-ingress-alb
   vpc_id  = local.vpc_id
-  subnets = local.private_subnet_ids
+  subnets = local.public_subnet_ids
   #security_groups = [local.ingress_alb_sg_id]
   security_groups = [data.aws_ssm_parameter.ingress_alb_sg_id.value]
   enable_deletion_protection = false
