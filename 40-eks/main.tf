@@ -1,4 +1,4 @@
-#to connect by terraform to aws to create eks cluster and manged group nodes, it needs key pair authentication:
+#to connect by terraform to aws to create the eks cluster and manged group nodes by eks, it needs key pair authentication:
 
 resource "aws_key_pair" "eks" {
   key_name   = "eks"
@@ -25,8 +25,8 @@ module "eks" {
   }
 
   vpc_id                   = local.vpc_id
-  subnet_ids               = local.private_subnet_ids
-  control_plane_subnet_ids = local.private_subnet_ids
+  subnet_ids               = local.private_subnet_ids   #for managed node groups
+  control_plane_subnet_ids = local.private_subnet_ids   #for control plane, we can create control plane and managed nodes in different subnets across the avialability_zones for the isolation, security, network ACL's
 
   create_cluster_security_group = false
   cluster_security_group_id = local.eks_control_plane_sg_id
@@ -57,19 +57,19 @@ module "eks" {
       key_name = aws_key_pair.eks.key_name
     }
 
-    # green = {
-    #   min_size      = 2
-    #   max_size      = 10
-    #   desired_size  = 2
-    #   capacity_type = "SPOT"
-    #   iam_role_additional_policies = {
-    #     AmazonEBSCSIDriverPolicy          = "arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy"
-    #     AmazonElasticFileSystemFullAccess = "arn:aws:iam::aws:policy/AmazonElasticFileSystemFullAccess"
-    #     ElasticLoadBalancingFullAccess = "arn:aws:iam::aws:policy/ElasticLoadBalancingFullAccess"
-    #   }
-    #   # EKS takes AWS Linux 2 as it's OS to the nodes
-    #   key_name = aws_key_pair.eks.key_name
-    # }
+    green = {
+      min_size      = 2
+      max_size      = 10
+      desired_size  = 2
+      capacity_type = "SPOT"
+      iam_role_additional_policies = {
+        AmazonEBSCSIDriverPolicy          = "arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy"
+        AmazonElasticFileSystemFullAccess = "arn:aws:iam::aws:policy/AmazonElasticFileSystemFullAccess"
+        ElasticLoadBalancingFullAccess = "arn:aws:iam::aws:policy/ElasticLoadBalancingFullAccess"
+      }
+      # EKS takes AWS Linux 2 as it's OS to the nodes
+      key_name = aws_key_pair.eks.key_name
+    }
 
   }
 
