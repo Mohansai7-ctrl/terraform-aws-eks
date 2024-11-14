@@ -45,7 +45,7 @@ module "eks_control_plane_sg" {
 
 module "node_sg" {
     source = "git::https://github.com/Mohansai7-ctrl/terraform-aws-security-group.git?ref=main"
-    vpc_id = var.vpc_id
+    vpc_id = local.vpc_id
     project_name = var.project_name
     environment = var.environment
     common_tags = var.common_tags
