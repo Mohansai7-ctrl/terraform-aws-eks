@@ -13,7 +13,7 @@ module "eks" {
   source  = "terraform-aws-modules/eks/aws"
   
   cluster_name    = "${var.project_name}-${var.environment}"
-  cluster_version = "1.30"    #we can use 1.31 to upgrade the cluster using blue-green deployemnt
+  cluster_version = "1.31"    #we can use 1.31 to upgrade the cluster using blue-green deployemnt
 
   cluster_endpoint_public_access  = true
 
@@ -43,19 +43,19 @@ module "eks" {
 
   eks_managed_node_groups = {
 
-    blue = {
-      min_size      = 2
-      max_size      = 10
-      desired_size  = 2
-      capacity_type = "SPOT"
-      iam_role_additional_policies = {
-        AmazonEBSCSIDriverPolicy          = "arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy"
-        AmazonElasticFileSystemFullAccess = "arn:aws:iam::aws:policy/AmazonElasticFileSystemFullAccess"
-        ElasticLoadBalancingFullAccess = "arn:aws:iam::aws:policy/ElasticLoadBalancingFullAccess"
-      }
-      # EKS takes AWS Linux 2 as it's OS to the nodes
-      key_name = aws_key_pair.eks.key_name
-    }
+    # blue = {
+    #   min_size      = 2
+    #   max_size      = 10
+    #   desired_size  = 2
+    #   capacity_type = "SPOT"
+    #   iam_role_additional_policies = {
+    #     AmazonEBSCSIDriverPolicy          = "arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy"
+    #     AmazonElasticFileSystemFullAccess = "arn:aws:iam::aws:policy/AmazonElasticFileSystemFullAccess"
+    #     ElasticLoadBalancingFullAccess = "arn:aws:iam::aws:policy/ElasticLoadBalancingFullAccess"
+    #   }
+    #   # EKS takes AWS Linux 2 as it's OS to the nodes
+    #   key_name = aws_key_pair.eks.key_name
+    # }
 
     green = {
       min_size      = 2
