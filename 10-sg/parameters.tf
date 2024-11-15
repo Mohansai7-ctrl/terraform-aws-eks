@@ -18,7 +18,7 @@ resource "aws_ssm_parameter" "ingress_alb_sg_id" {
 }
 
 resource "aws_ssm_parameter" "eks_control_plane_sg_id" {
-    name = "/${var.project_name}/${var.environment}/eks_control_plane_sg.id"
+    name = "/${var.project_name}/${var.environment}/eks_control_plane_sg_id"
     value = module.eks_control_plane_sg.id
     type = "String"
 }
