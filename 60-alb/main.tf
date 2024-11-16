@@ -104,3 +104,17 @@ resource "aws_lb_target_group" "expense" {
     timeout = 4
   }
 }
+
+# work-flow representation:
+
+# [Client Request] 
+#        ↓
+# [Ingress Controller (AWS ALB Controller)]
+#        ↓
+# [AWS ALB Listener (Port 80/443)]
+#        ↓
+# [Service (NodePort/ClusterIP)]
+#        ↓
+# [Pods]
+
+# ingress controller -> listerner -> rule -> target group ->aws load balancer controller -> service -> pods
