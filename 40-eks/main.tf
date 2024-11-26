@@ -1,4 +1,10 @@
-# this is eks cluster and blue-green nodes creation/setup, but to load the expense website using kubernetes, it has to be done/create with expense-k8 repository.
+# this is eks cluster and blue-green nodes creation/setup, 
+# first create vpc, sg, bastion and then eks.
+
+# once cluster is done and nodes are created, now connect via bastion public ip, do aws configure and do aws eks update-kubeconfig
+
+# then clone expense-k8, apply mysql,backend and frontend manifest files so that website will be run inside blue green nodes.
+
 
 
 #to connect by terraform to aws to create the eks cluster and manged group nodes by eks, it needs key pair authentication:
