@@ -1,3 +1,6 @@
+# this is eks cluster and blue-green nodes creation/setup, but to load the expense website using kubernetes, it has to be done/create with expense-k8 repository.
+
+
 #to connect by terraform to aws to create the eks cluster and manged group nodes by eks, it needs key pair authentication:
 
 resource "aws_key_pair" "eks" {
