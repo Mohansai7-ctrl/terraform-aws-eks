@@ -1,7 +1,7 @@
 #Root module is terraform-aws-security-group
 
 module "mysql_sg" {
-    source = "../../terraform-aws-security-group"
+    source = "git::https://github.com/Mohansai7-ctrl/terraform-aws-security-group.git?ref=main"
     project_name = var.project_name
     environment = var.environment
     sg_name = "mysql"
