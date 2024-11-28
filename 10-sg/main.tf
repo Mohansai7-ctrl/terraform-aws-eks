@@ -141,5 +141,17 @@ resource "aws_security_group_rule" "mysql_bastion" {
     security_group_id = module.mysql_sg.id
 }
 
+# In this repo, diagram we placed RDS Mysql, actually we need to connect the RDS Mysql from node, in security group , but for now we didn added
+# if to add below is the mysql_node
+
+# resource "aws_security_group_rule" "mysql_node" {
+#     type = "ingress"
+#     from_port = 3306
+#     to_port = 3306
+#     protocol = "tcp"
+#     source_security_group_id = module.node_sg.id
+#     security_group_id = module.mysql_sg.id
+# }
+
 
 
